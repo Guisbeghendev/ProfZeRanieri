@@ -15,7 +15,7 @@
                             Login
                         </Link>
                         <Link href="/register" class="inline-block px-5 py-2 text-lg text-black bg-transparent rounded-full hover:bg-roxo1 hover:text-prata1 dark:text-blue-500 transition-all duration-300 ease-in-out font-semibold">
-                            Register
+                            Cadastro
                         </Link>
                     </template>
 
@@ -53,7 +53,7 @@
                                     </li>
                                     <li>
                                         <button @click="$inertia.post('/logout')" class="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white transition-colors duration-200">
-                                            Logout
+                                            Sair
                                         </button>
                                     </li>
                                 </ul>
@@ -83,13 +83,13 @@
                         </Link>
                     </li>
                     <li>
-                        <Link href="/coral-ranieri" class="inline-block py-2 px-5 rounded-full text-prata1 hover:bg-laranja2 md:hover:text-prata1 dark:hover:text-blue-500 transition-all duration-300 ease-in-out">
-                            Coral Ranieri
+                        <Link href="/gremio" class="inline-block py-2 px-5 rounded-full text-prata1 hover:bg-laranja2 md:hover:text-prata1 dark:hover:text-blue-500 transition-all duration-300 ease-in-out">
+                            Grêmio
                         </Link>
                     </li>
                     <li>
-                        <Link href="/gremio" class="inline-block py-2 px-5 rounded-full text-prata1 hover:bg-laranja2 md:hover:text-prata1 dark:hover:text-blue-500 transition-all duration-300 ease-in-out">
-                            Grêmio
+                        <Link href="/coral-ranieri" class="inline-block py-2 px-5 rounded-full text-prata1 hover:bg-laranja2 md:hover:text-prata1 dark:hover:text-blue-500 transition-all duration-300 ease-in-out">
+                            Coral Ranieri
                         </Link>
                     </li>
                     <li>
@@ -139,6 +139,8 @@ const page = usePage();
 
 const dashboardRoute = computed(() => {
     const user = page.props.auth?.user;
+    // Note: Certifique-se de que o backend esteja enviando os papéis do usuário
+    // na prop $page.props.auth.user.roles.
     if (user && user.roles) {
         if (user.roles.some(role => role.name === 'admin')) {
             return '/admin/dashboard';
@@ -147,7 +149,7 @@ const dashboardRoute = computed(() => {
             return '/fotografo/dashboard';
         }
     }
-    return '/dashboard';
+    return '/dashboard'; // Rota padrão se não for admin nem fotografo, ou se os roles não existirem
 });
 
 const toggleDropdown = () => {
